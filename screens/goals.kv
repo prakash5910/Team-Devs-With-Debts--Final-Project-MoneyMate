@@ -1,0 +1,247 @@
+#:import dp kivy.metrics.dp
+#:import BottomNavBar components.navbar.BottomNavBar
+#:import GREEN_DARK components.theme.GREEN_DARK
+#:import GREEN_MID components.theme.GREEN_MID
+#:import RED components.theme.RED
+#:import WHITE components.theme.WHITE
+#:import BG components.theme.BG
+#:import GRAY_LIGHT components.theme.GRAY_LIGHT
+#:import GRAY_MID components.theme.GRAY_MID
+#:import TEXT_DARK components.theme.TEXT_DARK
+#:import TRANSPARENT components.theme.TRANSPARENT
+
+<GoalCard>:
+    orientation: "vertical"
+    size_hint_y: None
+    height: dp(138)
+    padding: dp(14)
+    spacing: dp(8)
+    canvas.before:
+        Color:
+            rgba: .95, .97, .95, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(12)]
+    BoxLayout:
+        size_hint_y: None
+        height: dp(24)
+        Label:
+            text: root.name
+            font_size: dp(15)
+            bold: True
+            color: TEXT_DARK
+            halign: "left"
+            text_size: self.size
+        Label:
+            text: root.amount_text
+            font_size: dp(12)
+            color: GRAY_MID
+            halign: "right"
+            text_size: self.size
+    ProgressBar:
+        max: 100
+        value: root.progress
+        size_hint_y: None
+        height: dp(24)
+    BoxLayout:
+        size_hint_y: None
+        height: dp(36)
+        spacing: dp(8)
+        Label:
+            text: str(int(root.progress)) + "% complete"
+            font_size: dp(12)
+            color: GRAY_MID
+        Button:
+            text: "Details"
+            font_size: dp(12)
+            background_normal: ""
+            background_color: GREEN_MID
+            color: WHITE
+            on_release: app.root.get_screen("goals").show_goal_detail(root.goal_id)
+        Button:
+            text: "+ Savings"
+            font_size: dp(12)
+            background_normal: ""
+            background_color: GREEN_DARK
+            color: WHITE
+            on_release: app.root.get_screen("goals").show_add_savings(root.goal_id)
+        Button:
+            text: "Delete"
+            font_size: dp(12)
+            background_normal: ""
+            background_color: RED
+            color: WHITE
+            on_release: app.root.get_screen("goals").delete_goal_confirmed(root.goal_id)
+
+<GoalsScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: BG
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(64)
+            padding: dp(14), dp(10)
+            canvas.before:
+                Color:
+                    rgba: GREEN_DARK
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:
+                text: "<"
+                font_size: dp(22)
+                bold: True
+                color: WHITE
+                background_normal: ""
+                background_color: TRANSPARENT
+                size_hint_x: None
+                width: dp(44)
+                on_release: app.root.current = "dashboard"
+            Label:
+                text: "Goal Progress"
+                font_size: dp(20)
+                bold: True
+                color: WHITE
+                halign: "left"
+                text_size: self.size
+            Button:
+                text: "+ New"
+                size_hint_x: None
+                width: dp(76)
+                background_normal: ""
+                background_color: GREEN_MID
+                color: WHITE
+                on_release: root.show_add_goal()
+
+        ScrollView:
+            BoxLayout:
+                orientation: "vertical"
+                padding: dp(16)
+                spacing: dp(14)
+                size_hint_y: None
+                height: self.minimum_height
+                Label:
+                    id: empty_label
+                    text: ""
+                    font_size: dp(15)
+                    color: GRAY_MID
+                    size_hint_y: None
+                    height: dp(60)
+                BoxLayout:
+                    id: goal_list
+                    orientation: "vertical"
+                    spacing: dp(14)
+                    size_hint_y: None
+                    height: self.minimum_height
+
+        BottomNavBar:
+
+    BoxLayout:
+        id: detail_holder
+        size_hint: None, None
+        size: 0, 0
+        opacity: 0
+        BoxLayout:
+            id: detail_content
+            orientation: "vertical"
+            padding: dp(20)
+            spacing: dp(12)
+            Label:
+                id: detail_text
+                text: ""
+                color: TEXT_DARK
+                font_size: dp(16)
+            Button:
+                text: "Close"
+                size_hint_y: None
+                height: dp(44)
+                on_release: root.detail_popup.dismiss()
+
+    BoxLayout:
+        id: savings_holder
+        size_hint: None, None
+        size: 0, 0
+        opacity: 0
+        BoxLayout:
+            id: savings_content
+            orientation: "vertical"
+            padding: dp(20)
+            spacing: dp(12)
+            TextInput:
+                id: savings_amount
+                hint_text: "Amount to add"
+                input_filter: "float"
+                multiline: False
+                size_hint_y: None
+                height: dp(44)
+            Label:
+                id: savings_error
+                text: ""
+                color: RED
+                size_hint_y: None
+                height: dp(20)
+            Button:
+                text: "Add"
+                size_hint_y: None
+                height: dp(44)
+                background_normal: ""
+                background_color: GREEN_MID
+                color: WHITE
+                on_release: root.save_savings()
+
+    BoxLayout:
+        id: add_goal_holder
+        size_hint: None, None
+        size: 0, 0
+        opacity: 0
+        BoxLayout:
+            id: add_goal_content
+            orientation: "vertical"
+            padding: dp(20)
+            spacing: dp(12)
+            TextInput:
+                id: goal_name_input
+                hint_text: "Goal name"
+                multiline: False
+                size_hint_y: None
+                height: dp(44)
+            TextInput:
+                id: goal_target_input
+                hint_text: "Target amount"
+                input_filter: "float"
+                multiline: False
+                size_hint_y: None
+                height: dp(44)
+            Label:
+                id: goal_error
+                text: ""
+                color: RED
+                size_hint_y: None
+                height: dp(20)
+            Button:
+                text: "Save Goal"
+                size_hint_y: None
+                height: dp(44)
+                background_normal: ""
+                background_color: GREEN_MID
+                color: WHITE
+                on_release: root.save_goal()
+<AddGoalContent@BoxLayout>:
+    orientation: "vertical"
+    spacing: "10dp"
+
+    TextInput:
+        id: goal_name
+        hint_text: "Goal name"
+
+    TextInput:
+        id: goal_amount
+        hint_text: "Amount"

@@ -1,0 +1,197 @@
+#:import dp kivy.metrics.dp
+#:import BottomNavBar components.navbar.BottomNavBar
+#:import GREEN_DARK components.theme.GREEN_DARK
+#:import GREEN_MID components.theme.GREEN_MID
+#:import WHITE components.theme.WHITE
+#:import BG components.theme.BG
+#:import GRAY_LIGHT components.theme.GRAY_LIGHT
+#:import GRAY_MID components.theme.GRAY_MID
+#:import TEXT_DARK components.theme.TEXT_DARK
+#:import RED components.theme.RED
+#:import TRANSPARENT components.theme.TRANSPARENT
+
+<SettingsScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: BG
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(64)
+            padding: dp(14), dp(10)
+            canvas.before:
+                Color:
+                    rgba: GREEN_DARK
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:
+                text: "<"
+                font_size: dp(22)
+                bold: True
+                color: WHITE
+                background_normal: ""
+                background_color: TRANSPARENT
+                size_hint_x: None
+                width: dp(44)
+                on_release: app.root.current = "dashboard"
+            Label:
+                text: "Settings"
+                font_size: dp(20)
+                bold: True
+                color: WHITE
+                halign: "left"
+                text_size: self.size
+            Label:
+                text: "MM"
+                font_size: dp(14)
+                bold: True
+                color: WHITE
+                size_hint_x: None
+                width: dp(40)
+
+        ScrollView:
+            BoxLayout:
+                orientation: "vertical"
+                padding: dp(24), dp(16)
+                spacing: dp(14)
+                size_hint_y: None
+                height: self.minimum_height
+
+                Label:
+                    text: "👤"
+                    font_size: dp(60)
+                    color: GRAY_MID
+                    size_hint_y: None
+                    height: dp(110)
+
+                Label:
+                    text: "User Information:"
+                    font_size: dp(15)
+                    color: TEXT_DARK
+                    size_hint_y: None
+                    height: dp(24)
+                    halign: "left"
+                    text_size: self.size
+
+                TextInput:
+                    id: name_input
+                    hint_text: "Name"
+                    multiline: False
+                    size_hint_y: None
+                    height: dp(46)
+                    background_normal: ""
+                    background_color: GRAY_LIGHT
+                TextInput:
+                    id: username_input
+                    hint_text: "Username"
+                    multiline: False
+                    size_hint_y: None
+                    height: dp(46)
+                    background_normal: ""
+                    background_color: GRAY_LIGHT
+                TextInput:
+                    id: email_input
+                    hint_text: "Email"
+                    multiline: False
+                    size_hint_y: None
+                    height: dp(46)
+                    background_normal: ""
+                    background_color: GRAY_LIGHT
+                TextInput:
+                    id: password_input
+                    hint_text: "New password (optional)"
+                    password: True
+                    multiline: False
+                    size_hint_y: None
+                    height: dp(46)
+                    background_normal: ""
+                    background_color: GRAY_LIGHT
+
+                Label:
+                    id: info_status
+                    text: ""
+                    font_size: dp(12)
+                    color: GREEN_MID
+                    size_hint_y: None
+                    height: dp(20)
+
+                Button:
+                    text: "Save Changes"
+                    size_hint_y: None
+                    height: dp(46)
+                    background_normal: ""
+                    background_color: GREEN_MID
+                    color: WHITE
+                    on_release: root.save_user_info()
+
+                Label:
+                    text: "Preferences:"
+                    font_size: dp(15)
+                    color: TEXT_DARK
+                    size_hint_y: None
+                    height: dp(28)
+                    halign: "left"
+                    text_size: self.size
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(46)
+                    Label:
+                        text: "Currency"
+                        color: TEXT_DARK
+                        halign: "left"
+                        text_size: self.size
+                    Spinner:
+                        id: currency_spinner
+                        text: "USD"
+                        values: ["USD", "EUR", "GBP", "JPY", "CAD", "AUD", "INR", "NPR"]
+                        size_hint_x: None
+                        width: dp(110)
+                        background_normal: ""
+                        background_color: GREEN_DARK
+                        color: WHITE
+                        on_text: root.on_currency(self.text)
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(46)
+                    Label:
+                        text: "Dark Mode"
+                        color: TEXT_DARK
+                        halign: "left"
+                        text_size: self.size
+                    Switch:
+                        id: theme_switch
+                        size_hint_x: None
+                        width: dp(80)
+                        on_active: root.on_theme(self.active)
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(46)
+                    Label:
+                        text: "Notifications"
+                        color: TEXT_DARK
+                        halign: "left"
+                        text_size: self.size
+                    Switch:
+                        id: notif_switch
+                        size_hint_x: None
+                        width: dp(80)
+                        on_active: root.on_notif(self.active)
+
+                Label:
+                    text: "MoneyMate v1.0.0\nBuilt by Devs with Debts"
+                    font_size: dp(12)
+                    color: GRAY_MID
+                    size_hint_y: None
+                    height: dp(50)
+
+        BottomNavBar:

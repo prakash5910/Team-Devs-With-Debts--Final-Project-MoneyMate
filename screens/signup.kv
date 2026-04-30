@@ -1,0 +1,160 @@
+#:import dp kivy.metrics.dp
+#:import GREEN_DARK components.theme.GREEN_DARK
+#:import GREEN_MID components.theme.GREEN_MID
+#:import WHITE components.theme.WHITE
+#:import GRAY_LIGHT components.theme.GRAY_LIGHT
+#:import GRAY_MID components.theme.GRAY_MID
+#:import TEXT_DARK components.theme.TEXT_DARK
+#:import RED components.theme.RED
+#:import TRANSPARENT components.theme.TRANSPARENT
+
+<LabeledInput@BoxLayout>:
+    label: ""
+    hint: ""
+    password: False
+    input_id: None
+    orientation: "vertical"
+    size_hint_y: None
+    height: dp(74)
+    Label:
+        text: root.label
+        font_size: dp(13)
+        color: GRAY_MID
+        halign: "left"
+        text_size: self.size
+        size_hint_y: None
+        height: dp(22)
+    TextInput:
+        id: root.input_id
+        hint_text: root.hint
+        password: root.password
+        multiline: False
+        size_hint_y: None
+        height: dp(46)
+        font_size: dp(15)
+        padding: dp(14), dp(12)
+        background_normal: ""
+        background_color: GRAY_LIGHT
+        foreground_color: TEXT_DARK
+        hint_text_color: GRAY_MID
+        cursor_color: GREEN_DARK
+
+<SignupScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(28), 0
+        canvas.before:
+            Color:
+                rgba: WHITE
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(64)
+            padding: 0, dp(10)
+            canvas.before:
+                Color:
+                    rgba: GREEN_DARK
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: "Create Account"
+                font_size: dp(20)
+                bold: True
+                color: WHITE
+
+        Widget:
+            size_hint_y: None
+            height: dp(24)
+
+        TextInput:
+            id: name_input
+            hint_text: "Enter your full name"
+            multiline: False
+            size_hint_y: None
+            height: dp(46)
+            background_normal: ""
+            background_color: GRAY_LIGHT
+            foreground_color: TEXT_DARK
+            hint_text_color: GRAY_MID
+        Widget:
+            size_hint_y: None
+            height: dp(8)
+        TextInput:
+            id: username_input
+            hint_text: "Choose a username"
+            multiline: False
+            size_hint_y: None
+            height: dp(46)
+            background_normal: ""
+            background_color: GRAY_LIGHT
+            foreground_color: TEXT_DARK
+            hint_text_color: GRAY_MID
+        Widget:
+            size_hint_y: None
+            height: dp(8)
+        TextInput:
+            id: email_input
+            hint_text: "Enter your email"
+            multiline: False
+            size_hint_y: None
+            height: dp(46)
+            background_normal: ""
+            background_color: GRAY_LIGHT
+            foreground_color: TEXT_DARK
+            hint_text_color: GRAY_MID
+        Widget:
+            size_hint_y: None
+            height: dp(8)
+        TextInput:
+            id: password_input
+            hint_text: "Create a password"
+            password: True
+            multiline: False
+            size_hint_y: None
+            height: dp(46)
+            background_normal: ""
+            background_color: GRAY_LIGHT
+            foreground_color: TEXT_DARK
+            hint_text_color: GRAY_MID
+            on_text_validate: root.do_signup()
+
+        Label:
+            id: error_label
+            text: ""
+            font_size: dp(12)
+            color: RED
+            size_hint_y: None
+            height: dp(30)
+
+        Button:
+            text: "Create Account"
+            size_hint_y: None
+            height: dp(50)
+            font_size: dp(17)
+            background_normal: ""
+            background_color: GREEN_MID
+            color: WHITE
+            on_release: root.do_signup()
+
+        Widget:
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(36)
+            Label:
+                text: "Already have an account?"
+                font_size: dp(13)
+                color: GRAY_MID
+            Button:
+                text: "Log In"
+                font_size: dp(13)
+                bold: True
+                color: GREEN_MID
+                background_normal: ""
+                background_color: TRANSPARENT
+                on_release: app.root.current = "login"

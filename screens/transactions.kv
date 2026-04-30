@@ -1,0 +1,235 @@
+#:import dp kivy.metrics.dp
+#:import BottomNavBar components.navbar.BottomNavBar
+#:import GREEN_DARK components.theme.GREEN_DARK
+#:import GREEN_MID components.theme.GREEN_MID
+#:import RED components.theme.RED
+#:import WHITE components.theme.WHITE
+#:import BG components.theme.BG
+#:import GRAY_LIGHT components.theme.GRAY_LIGHT
+#:import GRAY_MID components.theme.GRAY_MID
+#:import TEXT_DARK components.theme.TEXT_DARK
+#:import TRANSPARENT components.theme.TRANSPARENT
+
+<TransactionRow>:
+    orientation: "horizontal"
+    size_hint_y: None
+    height: dp(44)
+    canvas.before:
+        Color:
+            rgba: WHITE
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Label:
+        text: root.income_detail
+        font_size: dp(12)
+        color: TEXT_DARK
+    Label:
+        text: root.income_amount
+        font_size: dp(12)
+        bold: True
+        color: GREEN_MID
+    Label:
+        text: root.expense_detail
+        font_size: dp(12)
+        color: TEXT_DARK
+    Label:
+        text: root.expense_amount
+        font_size: dp(12)
+        bold: True
+        color: RED
+
+<TransactionsScreen>:
+    popup_holder: popup_holder
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: BG
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(64)
+            padding: dp(14), dp(10)
+            canvas.before:
+                Color:
+                    rgba: GREEN_DARK
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:
+                text: "<"
+                font_size: dp(22)
+                bold: True
+                color: WHITE
+                background_normal: ""
+                background_color: TRANSPARENT
+                size_hint_x: None
+                width: dp(44)
+                on_release: app.root.current = "dashboard"
+            Label:
+                text: "Recent\nTransactions"
+                font_size: dp(18)
+                bold: True
+                color: WHITE
+                halign: "left"
+                text_size: self.size
+            Label:
+                text: "MM"
+                font_size: dp(14)
+                bold: True
+                color: WHITE
+                size_hint_x: None
+                width: dp(40)
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(40)
+            canvas.before:
+                Color:
+                    rgba: WHITE
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: "Income"
+                font_size: dp(15)
+                bold: True
+                color: GREEN_MID
+            Label:
+                text: "Expenses"
+                font_size: dp(15)
+                bold: True
+                color: RED
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(28)
+            canvas.before:
+                Color:
+                    rgba: GRAY_LIGHT
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: "Details"
+                font_size: dp(12)
+                color: GRAY_MID
+            Label:
+                text: "Total"
+                font_size: dp(12)
+                color: GRAY_MID
+            Label:
+                text: "Details"
+                font_size: dp(12)
+                color: GRAY_MID
+            Label:
+                text: "Total"
+                font_size: dp(12)
+                color: GRAY_MID
+
+        ScrollView:
+            BoxLayout:
+                id: table_body
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+
+        Button:
+            text: "ADD"
+            size_hint_y: None
+            height: dp(52)
+            font_size: dp(18)
+            bold: True
+            background_normal: ""
+            background_color: GREEN_DARK
+            color: WHITE
+            on_release: root.show_add_popup()
+
+        BottomNavBar:
+
+    BoxLayout:
+        id: popup_holder
+        size_hint: None, None
+        size: 0, 0
+        opacity: 0
+        BoxLayout:
+            id: popup_content
+            orientation: "vertical"
+            padding: dp(20)
+            spacing: dp(12)
+            Label:
+                text: "Add Transaction"
+                font_size: dp(17)
+                bold: True
+                color: TEXT_DARK
+                size_hint_y: None
+                height: dp(30)
+            BoxLayout:
+                size_hint_y: None
+                height: dp(40)
+                spacing: dp(8)
+                ToggleButton:
+                    id: inc_btn
+                    text: "Income"
+                    group: "transaction_type"
+                    background_normal: ""
+                    background_color: GREEN_MID if self.state == "down" else GRAY_LIGHT
+                    color: WHITE if self.state == "down" else GRAY_MID
+                    on_release: root._set_type("income")
+                ToggleButton:
+                    id: exp_btn
+                    text: "Expense"
+                    group: "transaction_type"
+                    state: "down"
+                    background_normal: ""
+                    background_color: GREEN_DARK if self.state == "down" else GRAY_LIGHT
+                    color: WHITE if self.state == "down" else GRAY_MID
+                    on_release: root._set_type("expense")
+            TextInput:
+                id: amount_input
+                hint_text: "Amount"
+                input_filter: "float"
+                multiline: False
+                size_hint_y: None
+                height: dp(42)
+            TextInput:
+                id: category_input
+                hint_text: "Category"
+                multiline: False
+                size_hint_y: None
+                height: dp(42)
+            TextInput:
+                id: note_input
+                hint_text: "Note (optional)"
+                multiline: False
+                size_hint_y: None
+                height: dp(42)
+            Label:
+                id: popup_error
+                text: ""
+                color: RED
+                size_hint_y: None
+                height: dp(18)
+            BoxLayout:
+                size_hint_y: None
+                height: dp(44)
+                spacing: dp(10)
+                Button:
+                    text: "Cancel"
+                    background_normal: ""
+                    background_color: GRAY_LIGHT
+                    color: GRAY_MID
+                    on_release: root.popup.dismiss()
+                Button:
+                    text: "Save"
+                    background_normal: ""
+                    background_color: GREEN_MID
+                    color: WHITE
+                    on_release: root.save_transaction()

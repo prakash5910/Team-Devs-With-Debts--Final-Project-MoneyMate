@@ -1,0 +1,223 @@
+#:import dp kivy.metrics.dp
+#:import BottomNavBar components.navbar.BottomNavBar
+#:import GREEN_DARK components.theme.GREEN_DARK
+#:import GREEN_MID components.theme.GREEN_MID
+#:import GREEN_LIGHT components.theme.GREEN_LIGHT
+#:import RED components.theme.RED
+#:import WHITE components.theme.WHITE
+#:import BG components.theme.BG
+#:import GRAY_LIGHT components.theme.GRAY_LIGHT
+#:import GRAY_MID components.theme.GRAY_MID
+#:import TEXT_DARK components.theme.TEXT_DARK
+#:import TRANSPARENT components.theme.TRANSPARENT
+
+<MetricCard@BoxLayout>:
+    title: ""
+    value: ""
+    value_color: TEXT_DARK
+    orientation: "vertical"
+    padding: dp(14)
+    spacing: dp(6)
+    canvas.before:
+        Color:
+            rgba: WHITE
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(14)]
+    Label:
+        text: root.title
+        font_size: dp(13)
+        color: GRAY_MID
+        size_hint_y: None
+        height: dp(24)
+    Label:
+        text: root.value
+        font_size: dp(20)
+        bold: True
+        color: root.value_color
+
+<GoalPreview>:
+    orientation: "vertical"
+    size_hint_y: None
+    height: dp(78)
+    spacing: dp(8)
+    Label:
+        text: root.goal_name + "     " + root.goal_amount
+        font_size: dp(13)
+        color: TEXT_DARK
+        halign: "left"
+        text_size: self.size
+    ProgressBar:
+        max: 100
+        value: root.progress
+        size_hint_y: None
+        height: dp(18)
+
+<TransactionPreview>:
+    size_hint_y: None
+    height: dp(34)
+    padding: dp(8), 0
+    canvas.before:
+        Color:
+            rgba: GRAY_LIGHT
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(8)]
+    Label:
+        text: root.text
+        font_size: dp(13)
+        color: TEXT_DARK
+        halign: "left"
+        text_size: self.size
+
+<DashboardScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: BG
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(64)
+            padding: dp(16), dp(10)
+            canvas.before:
+                Color:
+                    rgba: GREEN_DARK
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                id: greeting
+                text: "Hello!"
+                font_size: dp(20)
+                bold: True
+                color: WHITE
+                halign: "left"
+                text_size: self.size
+            Label:
+                text: "MM"
+                font_size: dp(14)
+                bold: True
+                color: WHITE
+                size_hint_x: None
+                width: dp(40)
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(58)
+            padding: dp(8), dp(6)
+            Button:
+                text: "Dashboard"
+                background_normal: ""
+                background_color: TRANSPARENT
+                color: GREEN_DARK
+                on_release: app.root.current = "dashboard"
+            Button:
+                text: "Transactions"
+                background_normal: ""
+                background_color: TRANSPARENT
+                color: TEXT_DARK
+                on_release: app.root.current = "transactions"
+            Button:
+                text: "Goals"
+                background_normal: ""
+                background_color: TRANSPARENT
+                color: TEXT_DARK
+                on_release: app.root.current = "goals"
+            Button:
+                text: "Settings"
+                background_normal: ""
+                background_color: TRANSPARENT
+                color: TEXT_DARK
+                on_release: app.root.current = "settings"
+
+        ScrollView:
+            BoxLayout:
+                orientation: "vertical"
+                padding: dp(20), dp(14)
+                spacing: dp(16)
+                size_hint_y: None
+                height: self.minimum_height
+
+                Label:
+                    id: month_label
+                    text: "Month:"
+                    font_size: dp(16)
+                    bold: True
+                    color: TEXT_DARK
+                    size_hint_y: None
+                    height: dp(28)
+                    halign: "left"
+                    text_size: self.size
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(110)
+                    spacing: dp(12)
+                    MetricCard:
+                        title: "Income"
+                        value: income_label.text
+                        value_color: GREEN_LIGHT
+                        Label:
+                            id: income_label
+                            text: "$0.00"
+                            opacity: 0
+                    MetricCard:
+                        title: "Expenses"
+                        value: expense_label.text
+                        value_color: RED
+                        Label:
+                            id: expense_label
+                            text: "$0.00"
+                            opacity: 0
+
+                Label:
+                    id: balance_label
+                    text: "Balance: $0.00"
+                    font_size: dp(18)
+                    bold: True
+                    color: GREEN_DARK
+                    size_hint_y: None
+                    height: dp(34)
+
+                Label:
+                    text: "Goal Progress"
+                    font_size: dp(16)
+                    bold: True
+                    color: TEXT_DARK
+                    size_hint_y: None
+                    height: dp(28)
+                    halign: "left"
+                    text_size: self.size
+                BoxLayout:
+                    id: goal_box
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(8)
+
+                Label:
+                    text: "Recent Transactions"
+                    font_size: dp(16)
+                    bold: True
+                    color: TEXT_DARK
+                    size_hint_y: None
+                    height: dp(28)
+                    halign: "left"
+                    text_size: self.size
+                BoxLayout:
+                    id: transaction_box
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(8)
+
+        BottomNavBar:
