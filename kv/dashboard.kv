@@ -11,7 +11,7 @@
 
     canvas.before:
         Color:
-            rgba: 1, 1, 1, 1
+            rgba: 0.96, 0.97, 0.98, 1
         Rectangle:
             size: self.size
             pos: self.pos
@@ -19,14 +19,11 @@
     BoxLayout:
         orientation: "vertical"
 
-        # Header
+        # --- Header ---
         BoxLayout:
-            orientation: "horizontal"
             size_hint_y: None
-            height: dp(76)
-            padding: [dp(18), dp(10)]
-            spacing: dp(8)
-
+            height: dp(65)
+            padding: [dp(20), dp(10)]
             canvas.before:
                 Color:
                     rgba: 0.098, 0.235, 0.204, 1
@@ -37,304 +34,184 @@
             Label:
                 id: greeting_label
                 text: "Hello!"
-                font_size: dp(22)
+                font_size: dp(20)
                 bold: True
-                color: 1, 1, 1, 1
-                size_hint_x: 1
                 halign: "left"
-                valign: "middle"
                 text_size: self.size
 
             Image:
                 source: "assets/logo.png"
-                size_hint: None, None
-                size: dp(38), dp(38)
+                size_hint_x: None
+                width: dp(35)
 
-        # Top nav
+        # --- Top Navigation Bar ---
         BoxLayout:
             orientation: "horizontal"
             size_hint_y: None
-            height: dp(92)
-            padding: [dp(14), dp(8)]
-            spacing: dp(10)
-
-            FloatLayout:
-                Label:
-                    text: "\ue871"
-                    font_name: "MaterialIcons"
-                    font_size: dp(28)
-                    color: 0, 0, 0, 1
-                    size_hint: None, None
-                    size: dp(46), dp(46)
-                    pos_hint: {"center_x": 0.5, "top": 1}
-                    halign: "center"
-                    valign: "middle"
-                    text_size: self.size
-                    canvas.before:
-                        Color:
-                            rgba: 0.86, 0.86, 0.86, 1
-                        Ellipse:
-                            size: self.size
-                            pos: self.pos
-
-                Label:
-                    text: "Dashboard"
-                    font_size: dp(10)
-                    color: 0, 0, 0, 1
-                    size_hint: None, None
-                    size: dp(82), dp(20)
-                    pos_hint: {"center_x": 0.5, "y": 0}
-                    halign: "center"
-                    valign: "middle"
-                    text_size: self.size
-
-                Button:
-                    size_hint: 1, 1
-                    pos_hint: {"x": 0, "y": 0}
-                    background_normal: ""
-                    background_color: 0, 0, 0, 0
-                    on_press: root.manager.current = "dashboard"
-
-            FloatLayout:
-                Label:
-                    text: "\ue8b0"
-                    font_name: "MaterialIcons"
-                    font_size: dp(28)
-                    color: 0, 0, 0, 1
-                    size_hint: None, None
-                    size: dp(46), dp(46)
-                    pos_hint: {"center_x": 0.5, "top": 1}
-                    halign: "center"
-                    valign: "middle"
-                    text_size: self.size
-                    canvas.before:
-                        Color:
-                            rgba: 0.86, 0.86, 0.86, 1
-                        Ellipse:
-                            size: self.size
-                            pos: self.pos
-
-                Label:
-                    text: "Statements"
-                    font_size: dp(10)
-                    color: 0, 0, 0, 1
-                    size_hint: None, None
-                    size: dp(82), dp(20)
-                    pos_hint: {"center_x": 0.5, "y": 0}
-                    halign: "center"
-                    valign: "middle"
-                    text_size: self.size
-
-                Button:
-                    size_hint: 1, 1
-                    pos_hint: {"x": 0, "y": 0}
-                    background_normal: ""
-                    background_color: 0, 0, 0, 0
-                    on_press: root.manager.current = "statements"
-
-            FloatLayout:
-                Label:
-                    text: "\ue850"
-                    font_name: "MaterialIcons"
-                    font_size: dp(28)
-                    color: 0, 0, 0, 1
-                    size_hint: None, None
-                    size: dp(46), dp(46)
-                    pos_hint: {"center_x": 0.5, "top": 1}
-                    halign: "center"
-                    valign: "middle"
-                    text_size: self.size
-                    canvas.before:
-                        Color:
-                            rgba: 0.86, 0.86, 0.86, 1
-                        Ellipse:
-                            size: self.size
-                            pos: self.pos
-
-                Label:
-                    text: "Transactions"
-                    font_size: dp(10)
-                    color: 0, 0, 0, 1
-                    size_hint: None, None
-                    size: dp(88), dp(20)
-                    pos_hint: {"center_x": 0.5, "y": 0}
-                    halign: "center"
-                    valign: "middle"
-                    text_size: self.size
-
-                Button:
-                    size_hint: 1, 1
-                    pos_hint: {"x": 0, "y": 0}
-                    background_normal: ""
-                    background_color: 0, 0, 0, 0
-                    on_press: root.manager.current = "transactions"
-
-            FloatLayout:
-                Label:
-                    text: "\ue8b8"
-                    font_name: "MaterialIcons"
-                    font_size: dp(28)
-                    color: 0, 0, 0, 1
-                    size_hint: None, None
-                    size: dp(46), dp(46)
-                    pos_hint: {"center_x": 0.5, "top": 1}
-                    halign: "center"
-                    valign: "middle"
-                    text_size: self.size
-                    canvas.before:
-                        Color:
-                            rgba: 0.86, 0.86, 0.86, 1
-                        Ellipse:
-                            size: self.size
-                            pos: self.pos
-
-                Label:
-                    text: "Settings"
-                    font_size: dp(10)
-                    color: 0, 0, 0, 1
-                    size_hint: None, None
-                    size: dp(82), dp(20)
-                    pos_hint: {"center_x": 0.5, "y": 0}
-                    halign: "center"
-                    valign: "middle"
-                    text_size: self.size
-
-                Button:
-                    size_hint: 1, 1
-                    pos_hint: {"x": 0, "y": 0}
-                    background_normal: ""
-                    background_color: 0, 0, 0, 0
-                    on_press: root.manager.current = "settings"
-
-        Widget:
-            size_hint_y: None
-            height: dp(1)
-            canvas:
+            height: dp(85)
+            padding: [dp(10), dp(5)]
+            spacing: dp(4)
+            canvas.before:
                 Color:
-                    rgba: 0.88, 0.88, 0.88, 1
+                    rgba: 1, 1, 1, 1
                 Rectangle:
                     size: self.size
                     pos: self.pos
+                Color:
+                    rgba: 0.9, 0.9, 0.9, 1
+                Line:
+                    points: [self.x, self.y, self.right, self.y]
+                    width: 1
 
-        # Body
-        BoxLayout:
-            orientation: "vertical"
-            padding: [dp(20), dp(8)]
-            spacing: dp(4)
+            NavIcon:
+                text_icon: "\ue871"
+                label_text: "Dashboard"
+                on_release: root.manager.current = "dashboard"
+            NavIcon:
+                text_icon: "\ue8b0"
+                label_text: "Statements"
+                on_release: root.manager.current = "statements"
+            NavIcon:
+                text_icon: "\ue850"
+                label_text: "Transactions"
+                on_release: root.manager.current = "transactions"
+            NavIcon:
+                text_icon: "\ue8b8"
+                label_text: "Settings"
+                on_release: root.manager.current = "settings"
 
-            Label:
-                id: month_label
-                text: "Month: —"
-                font_size: dp(22)
-                color: 0.1, 0.1, 0.1, 1
-                size_hint_y: None
-                height: dp(36)
-                halign: "left"
-                valign: "middle"
-                text_size: self.size
-
-            # Income / Expense charts
+        # --- Scrollable Body ---
+        ScrollView:
+            do_scroll_x: False
             BoxLayout:
-                orientation: "horizontal"
-                size_hint_y: None
-                height: dp(185)
-                spacing: dp(18)
-
-                # Income side
-                BoxLayout:
-                    orientation: "vertical"
-                    spacing: dp(4)
-
-                    Label:
-                        id: income_label
-                        text: "$0.00"
-                        font_size: dp(14)
-                        color: 0.1, 0.1, 0.1, 1
-                        size_hint_y: None
-                        height: dp(24)
-                        halign: "center"
-                        valign: "middle"
-                        text_size: self.size
-
-                    FloatLayout:
-                        size_hint_y: None
-                        height: dp(118)
-
-                        FloatLayout:
-                            id: income_chart
-                            size_hint: None, None
-                            size: dp(118), dp(118)
-                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
-
-                    Label:
-                        text: "Income"
-                        font_size: dp(19)
-                        bold: True
-                        color: 0.18, 0.60, 0.40, 1
-                        size_hint_y: None
-                        height: dp(30)
-                        halign: "center"
-                        valign: "middle"
-                        text_size: self.size
-
-                # Expense side
-                BoxLayout:
-                    orientation: "vertical"
-                    spacing: dp(4)
-
-                    Label:
-                        id: expense_label
-                        text: "$0.00"
-                        font_size: dp(14)
-                        color: 0.1, 0.1, 0.1, 1
-                        size_hint_y: None
-                        height: dp(24)
-                        halign: "center"
-                        valign: "middle"
-                        text_size: self.size
-
-                    FloatLayout:
-                        size_hint_y: None
-                        height: dp(118)
-
-                        FloatLayout:
-                            id: expense_chart
-                            size_hint: None, None
-                            size: dp(118), dp(118)
-                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
-
-                    Label:
-                        text: "Expenses"
-                        font_size: dp(19)
-                        bold: True
-                        color: 0.85, 0.05, 0.05, 1
-                        size_hint_y: None
-                        height: dp(30)
-                        halign: "center"
-                        valign: "middle"
-                        text_size: self.size
-
-            Label:
-                text: "Goal Progress"
-                font_size: dp(22)
-                color: 0.1, 0.1, 0.1, 1
-                size_hint_y: None
-                height: dp(34)
-                halign: "left"
-                valign: "middle"
-                text_size: self.size
-
-            BoxLayout:
-                id: goals_container
                 orientation: "vertical"
                 size_hint_y: None
                 height: self.minimum_height
-                spacing: dp(8)
+                padding: dp(16)
+                spacing: dp(20)
 
-            Widget:
+                Label:
+                    id: month_label
+                    text: "Monthly Summary"
+                    bold: True
+                    font_size: dp(18)
+                    color: 0.1, 0.1, 0.1, 1
+                    size_hint_y: None
+                    height: dp(30)
+                    halign: "left"
+                    text_size: self.size
 
-        # Bottom nav
+                # --- Income/Expense Card Row ---
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(185)
+                    spacing: dp(12)
+
+                    DashboardCard:
+                        Label:
+                            text: "Income"
+                            font_size: dp(13)
+                            bold: True
+                            color: 0.4, 0.4, 0.4, 1
+                            size_hint_y: None
+                            height: dp(25)
+                        AnchorLayout:
+                            id: income_chart
+                        Label:
+                            id: income_label
+                            text: "$0.00"
+                            bold: True
+                            font_size: dp(16)
+                            color: 0.18, 0.60, 0.40, 1
+                            size_hint_y: None
+                            height: dp(25)
+
+                    DashboardCard:
+                        Label:
+                            text: "Expenses"
+                            font_size: dp(13)
+                            bold: True
+                            color: 0.4, 0.4, 0.4, 1
+                            size_hint_y: None
+                            height: dp(25)
+                        AnchorLayout:
+                            id: expense_chart
+                        Label:
+                            id: expense_label
+                            text: "$0.00"
+                            bold: True
+                            font_size: dp(16)
+                            color: 0.85, 0.15, 0.15, 1
+                            size_hint_y: None
+                            height: dp(25)
+
+                # --- Saving Goals Section ---
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(12)
+
+                    Label:
+                        text: "Saving Goals"
+                        bold: True
+                        font_size: dp(18)
+                        color: 0.1, 0.1, 0.1, 1
+                        size_hint_y: None
+                        height: dp(30)
+                        halign: "left"
+                        text_size: self.size
+
+                    BoxLayout:
+                        id: goals_container
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(10)
+
+        # --- Bottom Navigation ---
         BoxLayout:
             id: bottom_nav
             size_hint_y: None
-            height: dp(82)
+            height: dp(65)
+
+# --- Reusable Components ---
+<NavIcon@ButtonBehavior+BoxLayout>:
+    orientation: "vertical"
+    text_icon: ""
+    label_text: ""
+    spacing: dp(2)
+    Label:
+        text: root.text_icon
+        font_name: "MaterialIcons"
+        font_size: dp(24)
+        color: 0.098, 0.235, 0.204, 1
+        canvas.before:
+            Color:
+                rgba: 0.92, 0.95, 0.94, 1
+            Ellipse:
+                pos: self.center_x - dp(20), self.center_y - dp(20)
+                size: dp(40), dp(40)
+    Label:
+        text: root.label_text
+        font_size: dp(10)
+        color: 0.3, 0.3, 0.3, 1
+        size_hint_y: None
+        height: dp(15)
+
+<DashboardCard@BoxLayout>:
+    orientation: "vertical"
+    padding: dp(12)
+    spacing: dp(8)
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [dp(12)]
+        Color:
+            rgba: 0, 0, 0, 0.05
+        Line:
+            rounded_rectangle: [self.x, self.y, self.width, self.height, dp(12)]
+            width: 1.1
