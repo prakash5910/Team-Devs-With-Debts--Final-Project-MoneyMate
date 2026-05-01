@@ -1,204 +1,156 @@
 #:kivy 2.3.1
 
 <SignupScreen>:
-    name_input:     name_input
+    name_input: name_input
     username_input: username_input
-    email_input:    email_input
+    email_input: email_input
     password_input: password_input
-    error_label:    error_label
+    error_label: error_label
 
     canvas.before:
         Color:
-            rgba: 1, 1, 1, 1
+            rgba: 0.95, 0.97, 0.96, 1
         Rectangle:
             size: self.size
-            pos:  self.pos
+            pos: self.pos
 
     BoxLayout:
         orientation: "vertical"
-        spacing:     0
 
-        # ── Header bar ──────────────────────────────
+        # --- Header ---
         BoxLayout:
-            size_hint_y: None
-            height:      dp(64)
-            padding:     [dp(14), dp(10)]
-
+            size_hint_y: 0.25
             canvas.before:
                 Color:
                     rgba: 0.098, 0.235, 0.204, 1
-                Rectangle:
+                RoundedRectangle:
                     size: self.size
-                    pos:  self.pos
-
+                    pos: self.pos
+                    radius: [0, 0, dp(30), dp(30)]
+            
             Label:
-                text:      "Create Account"
-                font_size: dp(20)
-                bold:      True
-                color:     1, 1, 1, 1
-                halign:    "center"
+                text: "Create Account"
+                font_size: dp(24)
+                bold: True
+                color: 1, 1, 1, 1
 
-        # ── Form body ───────────────────────────────
-        BoxLayout:
-            orientation: "vertical"
-            padding:     [dp(28), dp(20)]
-            spacing:     dp(6)
-
-            Label:
-                text:        "Full Name"
-                font_size:   dp(13)
-                color:       0.55, 0.55, 0.55, 1
-                halign:      "left"
-                size_hint_y: None
-                height:      dp(20)
-                text_size:   self.size
-
-            TextInput:
-                id:               name_input
-                hint_text:        "Enter your full name"
-                multiline:        False
-                size_hint_y:      None
-                height:           dp(46)
-                font_size:        dp(15)
-                padding:          [dp(14), dp(12)]
-                background_normal: ""
-                background_color: 0.91, 0.91, 0.91, 1
-                foreground_color: 0.1, 0.1, 0.1, 1
-                hint_text_color:  0.55, 0.55, 0.55, 1
-                cursor_color:     0.098, 0.235, 0.204, 1
-
-            Widget:
-                size_hint_y: None
-                height:      dp(4)
-
-            Label:
-                text:        "Username"
-                font_size:   dp(13)
-                color:       0.55, 0.55, 0.55, 1
-                halign:      "left"
-                size_hint_y: None
-                height:      dp(20)
-                text_size:   self.size
-
-            TextInput:
-                id:               username_input
-                hint_text:        "Choose a username"
-                multiline:        False
-                size_hint_y:      None
-                height:           dp(46)
-                font_size:        dp(15)
-                padding:          [dp(14), dp(12)]
-                background_normal: ""
-                background_color: 0.91, 0.91, 0.91, 1
-                foreground_color: 0.1, 0.1, 0.1, 1
-                hint_text_color:  0.55, 0.55, 0.55, 1
-                cursor_color:     0.098, 0.235, 0.204, 1
-
-            Widget:
-                size_hint_y: None
-                height:      dp(4)
-
-            Label:
-                text:        "Email"
-                font_size:   dp(13)
-                color:       0.55, 0.55, 0.55, 1
-                halign:      "left"
-                size_hint_y: None
-                height:      dp(20)
-                text_size:   self.size
-
-            TextInput:
-                id:               email_input
-                hint_text:        "Enter your email"
-                multiline:        False
-                size_hint_y:      None
-                height:           dp(46)
-                font_size:        dp(15)
-                padding:          [dp(14), dp(12)]
-                background_normal: ""
-                background_color: 0.91, 0.91, 0.91, 1
-                foreground_color: 0.1, 0.1, 0.1, 1
-                hint_text_color:  0.55, 0.55, 0.55, 1
-                cursor_color:     0.098, 0.235, 0.204, 1
-
-            Widget:
-                size_hint_y: None
-                height:      dp(4)
-
-            Label:
-                text:        "Password"
-                font_size:   dp(13)
-                color:       0.55, 0.55, 0.55, 1
-                halign:      "left"
-                size_hint_y: None
-                height:      dp(20)
-                text_size:   self.size
-
-            TextInput:
-                id:               password_input
-                hint_text:        "Create a password"
-                multiline:        False
-                password:         True
-                size_hint_y:      None
-                height:           dp(46)
-                font_size:        dp(15)
-                padding:          [dp(14), dp(12)]
-                background_normal: ""
-                background_color: 0.91, 0.91, 0.91, 1
-                foreground_color: 0.1, 0.1, 0.1, 1
-                hint_text_color:  0.55, 0.55, 0.55, 1
-                cursor_color:     0.098, 0.235, 0.204, 1
-
-            Widget:
-                size_hint_y: None
-                height:      dp(6)
-
-            Label:
-                id:          error_label
-                text:        ""
-                font_size:   dp(12)
-                color:       0.85, 0.15, 0.15, 1
-                size_hint_y: None
-                height:      dp(20)
-                halign:      "center"
-
-            Widget:
-                size_hint_y: None
-                height:      dp(8)
-
-            Button:
-                text:             "Create Account"
-                font_size:        dp(17)
-                size_hint_y:      None
-                height:           dp(50)
-                background_normal: ""
-                background_color: 0.298, 0.686, 0.522, 1
-                color:            1, 1, 1, 1
-                on_press:         root.do_signup()
-
-            Widget:
-                size_hint_y: 1
-
+        # --- Form Area ---
+        FloatLayout:
             BoxLayout:
-                orientation: "horizontal"
-                size_hint_y: None
-                height:      dp(36)
-                spacing:     dp(4)
+                orientation: "vertical"
+                size_hint: 0.9, None
+                height: self.minimum_height
+                pos_hint: {"center_x": 0.5, "top": 1.05}
+                padding: dp(20)
+                spacing: dp(10)
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [dp(15)]
+                    Color:
+                        rgba: 0, 0, 0, 0.1
+                    Line:
+                        rounded_rectangle: [self.x, self.y, self.width, self.height, dp(15)]
+                        width: dp(1)
+
+                ModernLabel:
+                    text: "Full Name"
+                ModernInput:
+                    id: name_input
+                    hint_text: "Enter your name"
+
+                ModernLabel:
+                    text: "Username"
+                ModernInput:
+                    id: username_input
+                    hint_text: "Choose a username"
+
+                ModernLabel:
+                    text: "Email"
+                ModernInput:
+                    id: email_input
+                    hint_text: "yourname@mail.com"
+
+                ModernLabel:
+                    text: "Password"
+                ModernInput:
+                    id: password_input
+                    hint_text: "Min. 6 characters"
+                    password: True
 
                 Label:
-                    text:      "Already have an account?"
-                    font_size: dp(13)
-                    color:     0.55, 0.55, 0.55, 1
+                    id: error_label
+                    text: ""
+                    font_size: dp(12)
+                    color: 0.8, 0.1, 0.1, 1
+                    size_hint_y: None
+                    height: dp(20)
 
                 Button:
-                    text:             "Log In"
-                    font_size:        dp(13)
-                    bold:             True
-                    color:            0.298, 0.686, 0.522, 1
+                    text: "CREATE ACCOUNT"
+                    size_hint_y: None
+                    height: dp(48)
                     background_color: 0, 0, 0, 0
-                    background_normal: ""
-                    on_press:         root.manager.current = "login"
+                    bold: True
+                    on_press: root.do_signup()
+                    canvas.before:
+                        Color:
+                            rgba: (0.298, 0.686, 0.522, 1) if self.state == 'normal' else (0.2, 0.5, 0.4, 1)
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+                            radius: [dp(10)]
 
-            Widget:
-                size_hint_y: None
-                height:      dp(16)
+        # --- Footer ---
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)
+            padding: dp(20)
+            spacing: dp(5)
+            
+            Label:
+                text: "Already have an account?"
+                font_size: dp(13)
+                color: 0.4, 0.4, 0.4, 1
+                halign: "right"
+            
+            Button:
+                text: "Log In"
+                size_hint_x: None
+                width: dp(60)
+                color: 0.298, 0.686, 0.522, 1
+                background_color: 0, 0, 0, 0
+                bold: True
+                on_press: root.manager.current = "login"
+
+# --- Templates ---
+<ModernLabel@Label>:
+    font_size: dp(12)
+    bold: True
+    color: 0.3, 0.3, 0.3, 1
+    halign: "left"
+    size_hint_y: None
+    height: dp(16)
+    text_size: self.size
+
+<ModernInput@TextInput>:
+    size_hint_y: None
+    height: dp(42)
+    multiline: False
+    write_tab: False
+    padding: [dp(10), dp(10)]
+    background_normal: ""
+    background_active: ""
+    background_color: 0, 0, 0, 0
+    foreground_color: 0.1, 0.1, 0.1, 1  # Black text
+    cursor_color: 0.298, 0.686, 0.522, 1 # Emerald cursor
+    hint_text_color: 0.6, 0.6, 0.6, 1
+    canvas.after:
+        Color:
+            rgba: 0.9, 0.9, 0.9, 1
+        Line:
+            rounded_rectangle: [self.x, self.y, self.width, self.height, dp(8)]
+            width: dp(1)
