@@ -1,0 +1,273 @@
+#:kivy 2.3.1
+
+<SettingsScreen>:
+    name_input: name_input
+    username_input: username_input
+    email_input: email_input
+    password_input: password_input
+    info_status: info_status
+    currency_spin: currency_spin
+    theme_switch: theme_switch
+    notif_switch: notif_switch
+    bottom_nav: bottom_nav
+
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    BoxLayout:
+        orientation: "vertical"
+
+        # Header
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(76)
+            padding: [dp(16), dp(10)]
+            spacing: dp(10)
+
+            canvas.before:
+                Color:
+                    rgba: 0.098, 0.235, 0.204, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            Button:
+                text: "<"
+                font_size: dp(24)
+                bold: True
+                color: 1, 1, 1, 1
+                background_normal: ""
+                background_color: 0, 0, 0, 0
+                size_hint: None, None
+                size: dp(42), dp(50)
+                on_press: root.manager.current = "dashboard"
+
+            Label:
+                text: "Settings"
+                font_size: dp(24)
+                bold: True
+                color: 1, 1, 1, 1
+                halign: "left"
+                valign: "middle"
+                text_size: self.size
+
+            Image:
+                source: "assets/logo.png"
+                size_hint: None, None
+                size: dp(38), dp(38)
+
+        ScrollView:
+            do_scroll_x: False
+
+            BoxLayout:
+                orientation: "vertical"
+                padding: [dp(32), dp(18)]
+                spacing: dp(12)
+                size_hint_y: None
+                height: self.minimum_height
+
+                # Avatar
+                FloatLayout:
+                    size_hint_y: None
+                    height: dp(180)
+
+                    Label:
+                        text: "\ue7fd"
+                        font_name: "MaterialIcons"
+                        font_size: dp(115)
+                        color: 0, 0, 0, 1
+                        size_hint: None, None
+                        size: dp(155), dp(155)
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        halign: "center"
+                        valign: "middle"
+                        text_size: self.size
+
+                        canvas.before:
+                            Color:
+                                rgba: 0.88, 0.88, 0.88, 1
+                            Ellipse:
+                                size: self.size
+                                pos: self.pos
+
+                    Button:
+                        text: "Edit"
+                        font_size: dp(11)
+                        color: 0, 0, 0, 1
+                        size_hint: None, None
+                        size: dp(44), dp(36)
+                        pos_hint: {"center_x": 0.66, "center_y": 0.18}
+                        background_normal: ""
+                        background_color: 0.91, 0.91, 0.91, 1
+
+                Label:
+                    text: "User Information:"
+                    font_size: dp(18)
+                    color: 0.1, 0.1, 0.1, 1
+                    halign: "left"
+                    valign: "middle"
+                    text_size: self.size
+                    size_hint_y: None
+                    height: dp(32)
+
+                TextInput:
+                    id: name_input
+                    hint_text: "Name"
+                    multiline: False
+                    size_hint_y: None
+                    height: dp(48)
+                    font_size: dp(16)
+                    padding: [dp(14), dp(12)]
+                    background_normal: ""
+                    background_color: 0.91, 0.91, 0.91, 1
+
+                TextInput:
+                    id: username_input
+                    hint_text: "Username"
+                    multiline: False
+                    size_hint_y: None
+                    height: dp(48)
+                    font_size: dp(16)
+                    padding: [dp(14), dp(12)]
+                    background_normal: ""
+                    background_color: 0.91, 0.91, 0.91, 1
+
+                TextInput:
+                    id: email_input
+                    hint_text: "Email"
+                    multiline: False
+                    size_hint_y: None
+                    height: dp(48)
+                    font_size: dp(16)
+                    padding: [dp(14), dp(12)]
+                    background_normal: ""
+                    background_color: 0.91, 0.91, 0.91, 1
+
+                TextInput:
+                    id: password_input
+                    hint_text: "Password"
+                    multiline: False
+                    password: True
+                    size_hint_y: None
+                    height: dp(48)
+                    font_size: dp(16)
+                    padding: [dp(14), dp(12)]
+                    background_normal: ""
+                    background_color: 0.91, 0.91, 0.91, 1
+
+                Label:
+                    id: info_status
+                    text: ""
+                    font_size: dp(12)
+                    size_hint_y: None
+                    height: dp(20)
+                    halign: "center"
+
+                Button:
+                    text: "Save Changes"
+                    font_size: dp(16)
+                    size_hint_y: None
+                    height: dp(52)
+                    background_normal: ""
+                    background_color: 0.298, 0.686, 0.522, 1
+                    color: 1, 1, 1, 1
+                    on_press: root.save_user_info()
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(10)
+
+                Label:
+                    text: "Preferences:"
+                    font_size: dp(18)
+                    color: 0.1, 0.1, 0.1, 1
+                    halign: "left"
+                    text_size: self.size
+                    size_hint_y: None
+                    height: dp(34)
+
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: dp(50)
+
+                    Label:
+                        text: "Currency"
+                        font_size: dp(16)
+                        color: 0.1, 0.1, 0.1, 1
+                        halign: "left"
+                        valign: "middle"
+                        text_size: self.size
+
+                    Spinner:
+                        id: currency_spin
+                        text: "USD"
+                        values: ["USD", "EUR", "GBP", "JPY", "CAD", "AUD", "INR", "NPR"]
+                        size_hint: None, None
+                        size: dp(110), dp(40)
+                        background_normal: ""
+                        background_color: 0.098, 0.235, 0.204, 1
+                        color: 1, 1, 1, 1
+                        on_text: root.on_currency(self.text)
+
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: dp(50)
+
+                    Label:
+                        text: "Dark Mode"
+                        font_size: dp(16)
+                        color: 0.1, 0.1, 0.1, 1
+                        halign: "left"
+                        valign: "middle"
+                        text_size: self.size
+
+                    Switch:
+                        id: theme_switch
+                        size_hint_x: None
+                        width: dp(90)
+                        on_active: root.on_theme(self.active)
+
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: dp(50)
+
+                    Label:
+                        text: "Notifications"
+                        font_size: dp(16)
+                        color: 0.1, 0.1, 0.1, 1
+                        halign: "left"
+                        valign: "middle"
+                        text_size: self.size
+
+                    Switch:
+                        id: notif_switch
+                        size_hint_x: None
+                        width: dp(90)
+                        on_active: root.on_notif(self.active)
+
+                Label:
+                    text: "MoneyMate  v1.0.0\nBuilt by Devs with Debts"
+                    font_size: dp(13)
+                    color: 0.55, 0.55, 0.55, 1
+                    halign: "center"
+                    valign: "middle"
+                    text_size: self.size
+                    size_hint_y: None
+                    height: dp(50)
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(20)
+
+        BoxLayout:
+            id: bottom_nav
+            size_hint_y: None
+            height: dp(82)

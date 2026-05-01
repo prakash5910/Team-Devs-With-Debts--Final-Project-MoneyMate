@@ -1,0 +1,229 @@
+#:kivy 2.3.1
+
+<LoginScreen>:
+    username_input: username_input
+    password_input: password_input
+    error_label: error_label
+
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: [dp(28), 0]
+        spacing: 0
+
+        Widget:
+            size_hint_y: None
+            height: dp(44)
+
+        FloatLayout:
+            size_hint_y: None
+            height: dp(148)
+
+            Image:
+                source: "assets/logo.png"
+                size_hint: None, None
+                size: dp(170), dp(170)
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        Widget:
+            size_hint_y: None
+            height: dp(12)
+
+        Label:
+            text: "Welcome to"
+            font_size: dp(22)
+            color: 0.1, 0.1, 0.1, 1
+            size_hint_y: None
+            height: dp(32)
+            halign: "center"
+
+        Label:
+            text: "MONEY MATE"
+            font_size: dp(28)
+            bold: True
+            color: 0.1, 0.1, 0.1, 1
+            size_hint_y: None
+            height: dp(40)
+            halign: "center"
+
+        Widget:
+            size_hint_y: None
+            height: dp(18)
+
+        TextInput:
+            id: username_input
+            hint_text: "Username"
+            multiline: False
+            size_hint_y: None
+            height: dp(48)
+            font_size: dp(16)
+            padding: [dp(16), dp(12)]
+            background_normal: ""
+            background_color: 0.91, 0.91, 0.91, 1
+            foreground_color: 0.1, 0.1, 0.1, 1
+            hint_text_color: 0.55, 0.55, 0.55, 1
+            cursor_color: 0.098, 0.235, 0.204, 1
+
+        Widget:
+            size_hint_y: None
+            height: dp(10)
+
+        TextInput:
+            id: password_input
+            hint_text: "Password"
+            multiline: False
+            password: True
+            size_hint_y: None
+            height: dp(48)
+            font_size: dp(16)
+            padding: [dp(16), dp(12)]
+            background_normal: ""
+            background_color: 0.91, 0.91, 0.91, 1
+            foreground_color: 0.1, 0.1, 0.1, 1
+            hint_text_color: 0.55, 0.55, 0.55, 1
+            cursor_color: 0.098, 0.235, 0.204, 1
+
+        Label:
+            id: error_label
+            text: ""
+            font_size: dp(12)
+            color: 0.85, 0.15, 0.15, 1
+            size_hint_y: None
+            height: dp(24)
+            halign: "center"
+
+        Button:
+            text: "Log In"
+            font_size: dp(18)
+            size_hint_y: None
+            height: dp(50)
+            background_normal: ""
+            background_color: 0.298, 0.686, 0.522, 1
+            color: 1, 1, 1, 1
+            on_press: root.do_login()
+
+        Widget:
+            size_hint_y: None
+            height: dp(14)
+
+        Label:
+            text: "OR"
+            font_size: dp(14)
+            color: 0.55, 0.55, 0.55, 1
+            size_hint_y: None
+            height: dp(22)
+            halign: "center"
+
+        Widget:
+            size_hint_y: None
+            height: dp(10)
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(56)
+            spacing: dp(24)
+            padding: [dp(60), 0]
+
+            FloatLayout:
+                size_hint: None, None
+                size: dp(54), dp(54)
+
+                Button:
+                    background_normal: ""
+                    background_color: 0.91, 0.91, 0.91, 1
+                    size_hint: 1, 1
+
+                Image:
+                    source: "assets/google.png"
+                    size_hint: None, None
+                    size: dp(30), dp(30)
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+            FloatLayout:
+                size_hint: None, None
+                size: dp(54), dp(54)
+
+                Button:
+                    background_normal: ""
+                    background_color: 0.1, 0.1, 0.1, 1
+                    size_hint: 1, 1
+
+                Image:
+                    source: "assets/facebook.png"
+                    size_hint: None, None
+                    size: dp(32), dp(32)
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+            FloatLayout:
+                size_hint: None, None
+                size: dp(54), dp(54)
+
+                Button:
+                    background_normal: ""
+                    background_color: 0.91, 0.91, 0.91, 1
+                    size_hint: 1, 1
+
+                Image:
+                    source: "assets/apple.png"
+                    size_hint: None, None
+                    size: dp(30), dp(30)
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        Widget:
+            size_hint_y: 1
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(30)
+            spacing: dp(4)
+
+            Label:
+                text: "New user?"
+                font_size: dp(13)
+                color: 0.55, 0.55, 0.55, 1
+
+            Button:
+                text: "Sign Up here"
+                font_size: dp(13)
+                bold: True
+                color: 0.298, 0.686, 0.522, 1
+                background_color: 0, 0, 0, 0
+                background_normal: ""
+                on_press: root.manager.current = "signup"
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(28)
+
+            Widget:
+                size_hint_x: 1
+
+            Label:
+                text: "V.1.0.0  "
+                font_size: dp(11)
+                color: 0.55, 0.55, 0.55, 1
+                size_hint_x: None
+                width: dp(60)
+                halign: "right"
+
+            Button:
+                text: "Learn more?"
+                font_size: dp(11)
+                color: 0.2, 0.4, 0.9, 1
+                background_color: 0, 0, 0, 0
+                background_normal: ""
+                size_hint_x: None
+                width: dp(90)
+
+        Widget:
+            size_hint_y: None
+            height: dp(8)

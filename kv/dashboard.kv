@@ -1,0 +1,340 @@
+#:kivy 2.3.1
+
+<DashboardScreen>:
+    greeting_label: greeting_label
+    month_label: month_label
+    income_label: income_label
+    expense_label: expense_label
+    income_chart: income_chart
+    expense_chart: expense_chart
+    goals_container: goals_container
+
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    BoxLayout:
+        orientation: "vertical"
+
+        # Header
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(76)
+            padding: [dp(18), dp(10)]
+            spacing: dp(8)
+
+            canvas.before:
+                Color:
+                    rgba: 0.098, 0.235, 0.204, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            Label:
+                id: greeting_label
+                text: "Hello!"
+                font_size: dp(22)
+                bold: True
+                color: 1, 1, 1, 1
+                size_hint_x: 1
+                halign: "left"
+                valign: "middle"
+                text_size: self.size
+
+            Image:
+                source: "assets/logo.png"
+                size_hint: None, None
+                size: dp(38), dp(38)
+
+        # Top nav
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(92)
+            padding: [dp(14), dp(8)]
+            spacing: dp(10)
+
+            FloatLayout:
+                Label:
+                    text: "\ue871"
+                    font_name: "MaterialIcons"
+                    font_size: dp(28)
+                    color: 0, 0, 0, 1
+                    size_hint: None, None
+                    size: dp(46), dp(46)
+                    pos_hint: {"center_x": 0.5, "top": 1}
+                    halign: "center"
+                    valign: "middle"
+                    text_size: self.size
+                    canvas.before:
+                        Color:
+                            rgba: 0.86, 0.86, 0.86, 1
+                        Ellipse:
+                            size: self.size
+                            pos: self.pos
+
+                Label:
+                    text: "Dashboard"
+                    font_size: dp(10)
+                    color: 0, 0, 0, 1
+                    size_hint: None, None
+                    size: dp(82), dp(20)
+                    pos_hint: {"center_x": 0.5, "y": 0}
+                    halign: "center"
+                    valign: "middle"
+                    text_size: self.size
+
+                Button:
+                    size_hint: 1, 1
+                    pos_hint: {"x": 0, "y": 0}
+                    background_normal: ""
+                    background_color: 0, 0, 0, 0
+                    on_press: root.manager.current = "dashboard"
+
+            FloatLayout:
+                Label:
+                    text: "\ue8b0"
+                    font_name: "MaterialIcons"
+                    font_size: dp(28)
+                    color: 0, 0, 0, 1
+                    size_hint: None, None
+                    size: dp(46), dp(46)
+                    pos_hint: {"center_x": 0.5, "top": 1}
+                    halign: "center"
+                    valign: "middle"
+                    text_size: self.size
+                    canvas.before:
+                        Color:
+                            rgba: 0.86, 0.86, 0.86, 1
+                        Ellipse:
+                            size: self.size
+                            pos: self.pos
+
+                Label:
+                    text: "Statements"
+                    font_size: dp(10)
+                    color: 0, 0, 0, 1
+                    size_hint: None, None
+                    size: dp(82), dp(20)
+                    pos_hint: {"center_x": 0.5, "y": 0}
+                    halign: "center"
+                    valign: "middle"
+                    text_size: self.size
+
+                Button:
+                    size_hint: 1, 1
+                    pos_hint: {"x": 0, "y": 0}
+                    background_normal: ""
+                    background_color: 0, 0, 0, 0
+                    on_press: root.manager.current = "statements"
+
+            FloatLayout:
+                Label:
+                    text: "\ue850"
+                    font_name: "MaterialIcons"
+                    font_size: dp(28)
+                    color: 0, 0, 0, 1
+                    size_hint: None, None
+                    size: dp(46), dp(46)
+                    pos_hint: {"center_x": 0.5, "top": 1}
+                    halign: "center"
+                    valign: "middle"
+                    text_size: self.size
+                    canvas.before:
+                        Color:
+                            rgba: 0.86, 0.86, 0.86, 1
+                        Ellipse:
+                            size: self.size
+                            pos: self.pos
+
+                Label:
+                    text: "Transactions"
+                    font_size: dp(10)
+                    color: 0, 0, 0, 1
+                    size_hint: None, None
+                    size: dp(88), dp(20)
+                    pos_hint: {"center_x": 0.5, "y": 0}
+                    halign: "center"
+                    valign: "middle"
+                    text_size: self.size
+
+                Button:
+                    size_hint: 1, 1
+                    pos_hint: {"x": 0, "y": 0}
+                    background_normal: ""
+                    background_color: 0, 0, 0, 0
+                    on_press: root.manager.current = "transactions"
+
+            FloatLayout:
+                Label:
+                    text: "\ue8b8"
+                    font_name: "MaterialIcons"
+                    font_size: dp(28)
+                    color: 0, 0, 0, 1
+                    size_hint: None, None
+                    size: dp(46), dp(46)
+                    pos_hint: {"center_x": 0.5, "top": 1}
+                    halign: "center"
+                    valign: "middle"
+                    text_size: self.size
+                    canvas.before:
+                        Color:
+                            rgba: 0.86, 0.86, 0.86, 1
+                        Ellipse:
+                            size: self.size
+                            pos: self.pos
+
+                Label:
+                    text: "Settings"
+                    font_size: dp(10)
+                    color: 0, 0, 0, 1
+                    size_hint: None, None
+                    size: dp(82), dp(20)
+                    pos_hint: {"center_x": 0.5, "y": 0}
+                    halign: "center"
+                    valign: "middle"
+                    text_size: self.size
+
+                Button:
+                    size_hint: 1, 1
+                    pos_hint: {"x": 0, "y": 0}
+                    background_normal: ""
+                    background_color: 0, 0, 0, 0
+                    on_press: root.manager.current = "settings"
+
+        Widget:
+            size_hint_y: None
+            height: dp(1)
+            canvas:
+                Color:
+                    rgba: 0.88, 0.88, 0.88, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+        # Body
+        BoxLayout:
+            orientation: "vertical"
+            padding: [dp(20), dp(8)]
+            spacing: dp(4)
+
+            Label:
+                id: month_label
+                text: "Month: —"
+                font_size: dp(22)
+                color: 0.1, 0.1, 0.1, 1
+                size_hint_y: None
+                height: dp(36)
+                halign: "left"
+                valign: "middle"
+                text_size: self.size
+
+            # Income / Expense charts
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: dp(185)
+                spacing: dp(18)
+
+                # Income side
+                BoxLayout:
+                    orientation: "vertical"
+                    spacing: dp(4)
+
+                    Label:
+                        id: income_label
+                        text: "$0.00"
+                        font_size: dp(14)
+                        color: 0.1, 0.1, 0.1, 1
+                        size_hint_y: None
+                        height: dp(24)
+                        halign: "center"
+                        valign: "middle"
+                        text_size: self.size
+
+                    FloatLayout:
+                        size_hint_y: None
+                        height: dp(118)
+
+                        FloatLayout:
+                            id: income_chart
+                            size_hint: None, None
+                            size: dp(118), dp(118)
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                    Label:
+                        text: "Income"
+                        font_size: dp(19)
+                        bold: True
+                        color: 0.18, 0.60, 0.40, 1
+                        size_hint_y: None
+                        height: dp(30)
+                        halign: "center"
+                        valign: "middle"
+                        text_size: self.size
+
+                # Expense side
+                BoxLayout:
+                    orientation: "vertical"
+                    spacing: dp(4)
+
+                    Label:
+                        id: expense_label
+                        text: "$0.00"
+                        font_size: dp(14)
+                        color: 0.1, 0.1, 0.1, 1
+                        size_hint_y: None
+                        height: dp(24)
+                        halign: "center"
+                        valign: "middle"
+                        text_size: self.size
+
+                    FloatLayout:
+                        size_hint_y: None
+                        height: dp(118)
+
+                        FloatLayout:
+                            id: expense_chart
+                            size_hint: None, None
+                            size: dp(118), dp(118)
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                    Label:
+                        text: "Expenses"
+                        font_size: dp(19)
+                        bold: True
+                        color: 0.85, 0.05, 0.05, 1
+                        size_hint_y: None
+                        height: dp(30)
+                        halign: "center"
+                        valign: "middle"
+                        text_size: self.size
+
+            Label:
+                text: "Goal Progress"
+                font_size: dp(22)
+                color: 0.1, 0.1, 0.1, 1
+                size_hint_y: None
+                height: dp(34)
+                halign: "left"
+                valign: "middle"
+                text_size: self.size
+
+            BoxLayout:
+                id: goals_container
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(8)
+
+            Widget:
+
+        # Bottom nav
+        BoxLayout:
+            id: bottom_nav
+            size_hint_y: None
+            height: dp(82)

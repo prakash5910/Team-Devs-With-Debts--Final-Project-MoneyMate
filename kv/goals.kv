@@ -1,0 +1,101 @@
+#:kivy 2.3.1
+
+<GoalsScreen>:
+    goals_container: goals_container
+    bottom_nav: bottom_nav
+
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    BoxLayout:
+        orientation: "vertical"
+
+        # Header
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(76)
+            padding: [dp(16), dp(10)]
+            spacing: dp(10)
+
+            canvas.before:
+                Color:
+                    rgba: 0.098, 0.235, 0.204, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            Button:
+                text: "<"
+                font_size: dp(24)
+                bold: True
+                color: 1, 1, 1, 1
+                background_normal: ""
+                background_color: 0, 0, 0, 0
+                size_hint: None, None
+                size: dp(42), dp(50)
+                on_press: root.manager.current = "dashboard"
+
+            Label:
+                text: "Goal Progress"
+                font_size: dp(22)
+                bold: True
+                color: 1, 1, 1, 1
+                halign: "left"
+                valign: "middle"
+                text_size: self.size
+
+            Image:
+                source: "assets/logo.png"
+                size_hint: None, None
+                size: dp(38), dp(38)
+
+        # Add goal button row
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(64)
+            padding: [dp(20), dp(10)]
+            spacing: dp(10)
+
+            Label:
+                text: "Your Goals"
+                font_size: dp(22)
+                bold: True
+                color: 0.1, 0.1, 0.1, 1
+                halign: "left"
+                valign: "middle"
+                text_size: self.size
+
+            Button:
+                text: "+ New"
+                font_size: dp(14)
+                bold: True
+                color: 1, 1, 1, 1
+                background_normal: ""
+                background_color: 0.298, 0.686, 0.522, 1
+                size_hint: None, None
+                size: dp(80), dp(40)
+                on_press: root.show_add_popup()
+
+        # Scrollable goal cards
+        ScrollView:
+            do_scroll_x: False
+
+            BoxLayout:
+                id: goals_container
+                orientation: "vertical"
+                padding: [dp(18), dp(12)]
+                spacing: dp(14)
+                size_hint_y: None
+                height: self.minimum_height
+
+        # Bottom nav
+        BoxLayout:
+            id: bottom_nav
+            size_hint_y: None
+            height: dp(82)
