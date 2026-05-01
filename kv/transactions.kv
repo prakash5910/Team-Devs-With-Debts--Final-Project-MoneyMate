@@ -6,110 +6,50 @@
 
     canvas.before:
         Color:
-            rgba: 1, 1, 1, 1
+            rgba: 0.96, 0.97, 0.98, 1
         Rectangle:
             size: self.size
-            pos:  self.pos
+            pos: self.pos
 
     BoxLayout:
         orientation: "vertical"
 
-        # Header
+        # --- Header ---
         BoxLayout:
-            orientation: "horizontal"
             size_hint_y: None
-            height: dp(64)
-            padding: [dp(14), dp(10)]
-            spacing: dp(10)
-
+            height: dp(70)
+            padding: [dp(20), dp(10)]
             canvas.before:
                 Color:
                     rgba: 0.098, 0.235, 0.204, 1
                 Rectangle:
                     size: self.size
-                    pos:  self.pos
-
-            Button:
-                text: "<"
-                font_size: dp(22)
-                bold: True
-                color: 1, 1, 1, 1
-                background_color: 0, 0, 0, 0
-                background_normal: ""
-                size_hint: None, None
-                size: dp(36), dp(44)
-                on_press: root.manager.current = "dashboard"
-
-            BoxLayout:
-                orientation: "vertical"
-
-                Label:
-                    text: "Recent"
-                    font_size: dp(18)
-                    bold: True
-                    color: 1, 1, 1, 1
-                    halign: "left"
-                    valign: "middle"
-                    text_size: self.size
-
-                Label:
-                    text: "Transactions"
-                    font_size: dp(18)
-                    bold: True
-                    color: 1, 1, 1, 1
-                    halign: "left"
-                    valign: "middle"
-                    text_size: self.size
-
-            Image:
-                source: "assets/logo.png"
-                size_hint: None, None
-                size: dp(36), dp(36)
-
-        # Date filter row
-        BoxLayout:
-            orientation: "horizontal"
-            size_hint_y: None
-            height: dp(50)
-            padding: [dp(14), dp(6)]
-            spacing: dp(8)
-
-            Label:
-                id: date_label
-                text: "From: ______  to  ______"
-                font_size: dp(15)
-                color: 0.25, 0.25, 0.25, 1
-                halign: "left"
-                valign: "middle"
-                text_size: self.size
-
-            Button:
-                text: "\ue916"
-                font_name: "MaterialIcons"
-                font_size: dp(24)
-                background_normal: ""
-                background_color: 0.86, 0.86, 0.86, 1
-                color: 0.1, 0.1, 0.1, 1
-                size_hint: None, None
-                size: dp(46), dp(40)
-                on_press: root.show_date_filter_popup()
-
-        Widget:
-            size_hint_y: None
-            height: dp(1)
-            canvas:
-                Color:
-                    rgba: 0.85, 0.85, 0.85, 1
-                Rectangle:
-                    size: self.size
                     pos: self.pos
 
-        # Table header
-        BoxLayout:
-            orientation: "horizontal"
-            size_hint_y: None
-            height: dp(40)
+            Button:
+                text: "\ue5cb"
+                font_name: "MaterialIcons"
+                font_size: dp(32)
+                size_hint: None, None
+                size: dp(40), dp(40)
+                pos_hint: {"center_y": .5}
+                background_color: 0, 0, 0, 0
+                on_release: root.manager.current = "dashboard"
 
+            Label:
+                text: "Recent Activity"
+                font_size: dp(20)
+                bold: True
+                color: 1, 1, 1, 1
+                halign: "left"
+                text_size: self.size
+
+        # --- History Filter Bar ---
+        BoxLayout:
+            size_hint_y: None
+            height: dp(55)
+            padding: [dp(25), dp(5)] # Increased left padding to align with cards
+            spacing: dp(10)
             canvas.before:
                 Color:
                     rgba: 1, 1, 1, 1
@@ -118,109 +58,63 @@
                     pos: self.pos
 
             Label:
-                text: "Income"
-                font_size: dp(15)
-                bold: True
-                color: 0.18, 0.60, 0.40, 1
-                halign: "center"
+                id: date_label
+                text: "Showing: All History"
+                font_size: dp(14)
+                color: 0.3, 0.3, 0.3, 1
+                halign: "left"
+                valign: "middle"
+                text_size: self.size
 
-            Widget:
-                size_hint_x: None
-                width: dp(1)
-                canvas:
-                    Color:
-                        rgba: 0.80, 0.80, 0.80, 1
-                    Rectangle:
-                        size: self.size
-                        pos: self.pos
+            Button:
+                text: "\ue916"
+                font_name: "MaterialIcons"
+                font_size: dp(24)
+                size_hint: None, None
+                size: dp(40), dp(40)
+                pos_hint: {"center_y": .5}
+                background_normal: ""
+                background_color: 0.9, 0.92, 0.91, 1
+                color: 0.098, 0.235, 0.204, 1
+                on_release: root.show_date_filter_popup()
 
-            Label:
-                text: "Expenses"
-                font_size: dp(15)
-                bold: True
-                color: 0.85, 0.15, 0.15, 1
-                halign: "center"
-
-        # Sub-header
-        BoxLayout:
-            orientation: "horizontal"
-            size_hint_y: None
-            height: dp(28)
-
-            canvas.before:
-                Color:
-                    rgba: 0.93, 0.93, 0.93, 1
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
-
-            Label:
-                text: "Details"
-                font_size: dp(12)
-                bold: True
-                color: 0.55, 0.55, 0.55, 1
-                halign: "center"
-
-            Label:
-                text: "Total"
-                font_size: dp(12)
-                bold: True
-                color: 0.55, 0.55, 0.55, 1
-                halign: "center"
-
-            Label:
-                text: "Details"
-                font_size: dp(12)
-                bold: True
-                color: 0.55, 0.55, 0.55, 1
-                halign: "center"
-
-            Label:
-                text: "Total"
-                font_size: dp(12)
-                bold: True
-                color: 0.55, 0.55, 0.55, 1
-                halign: "center"
-
-        Widget:
-            size_hint_y: None
-            height: dp(1)
-            canvas:
-                Color:
-                    rgba: 0.80, 0.80, 0.80, 1
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
-
-        # Table rows
+        # --- Transactions List ---
         ScrollView:
+            do_scroll_x: False
             BoxLayout:
                 id: table_body
                 orientation: "vertical"
                 size_hint_y: None
                 height: self.minimum_height
+                padding: [dp(20), dp(16)] # Added horizontal breathing room
+                spacing: dp(12)
 
-        # Gap above ADD button
-        Widget:
+        # --- Add Transaction Button (LIFTED) ---
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
             size_hint_y: None
-            height: dp(10)
+            height: dp(100) # Increased height to lift the button
+            padding: [0, dp(15), 0, dp(25)] # Pushes button up from the bottom nav
+            
+            Button:
+                text: "+ ADD TRANSACTION"
+                size_hint: None, None
+                size: dp(280), dp(50)
+                bold: True
+                color: 1, 1, 1, 1
+                background_color: 0, 0, 0, 0
+                on_release: root.show_add_popup()
+                canvas.before:
+                    Color:
+                        rgba: 0.098, 0.235, 0.204, 1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(25)]
 
-        Button:
-            text: "ADD"
-            size_hint_y: None
-            height: dp(56)
-            font_size: dp(18)
-            bold: True
-            background_normal: ""
-            background_color: 0.098, 0.235, 0.204, 1
-            color: 1, 1, 1, 1
-            size_hint_x: None
-            width: dp(300)
-            pos_hint: {"center_x": 0.5}
-            on_press: root.show_add_popup()
-
-        # Bottom nav
+        # --- Bottom Nav ---
         BoxLayout:
             id: bottom_nav
             size_hint_y: None
-            height: dp(72)
+            height: dp(65)
